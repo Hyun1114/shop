@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>index.jsp</title>
+<title>test.jsp</title>
 </head>
 <body>
 	<!-- start :  sub menu include -->
@@ -12,6 +12,7 @@
 		<jsp:include page="/partial/submenu.jsp"></jsp:include>
 	</div>
 	<!-- end : sub menu include -->
-	<h1>메인페이지</h1>
+	<h1>테스트페이지</h1>
+
 </body>
 </html>
