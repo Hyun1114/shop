@@ -17,7 +17,13 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-	<div class="container p-3 my-3 bg-dark text-white" style="text-align: center;">
+<div class="container p-3 my-3 bg-dark text-white" style="text-align: center;">
+	<!-- start :  sub menu include -->
+	<div>
+		<jsp:include page="/partial/mainMenu.jsp"></jsp:include>
+	</div>
+	<!-- end : sub menu include -->
+	<div>
 		<form action="<%=request.getContextPath() %>/loginAction.jsp" class=".custom-select">
 		<h1 style="text-align : center">로그인</h1>
 			<div class="text-white">아이디 : </div>
@@ -27,5 +33,6 @@
 			<div><button class="btn btn-warning" type="submit">로그인</button></div>
 		</form>
 	</div>
+</div>	
 </body>
 </html>
