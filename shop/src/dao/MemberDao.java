@@ -10,7 +10,60 @@ import commons.DBUtil;
 import vo.Member;
 
 public class MemberDao {
-	//[관리자] 라스트 페이지
+	// [관리자] 회원목록 출력
+	public ArrayList<Member> selectMemberListAllBysearchMemberID(int beginRow, int rowPerPage, String searchMemberId) throws ClassNotFoundException, SQLException {
+		ArrayList<Member> list = new ArrayList<Member>();
+	
+		// MariaDB 연결
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+						
+		// 디버깅 코드
+		System.out.println("conn : "+conn);
+		
+		/*		 
+		 * SELECT member_no memberNo, 
+		 * member_id memberId, 
+		 * member_level memberLevel, 
+		 * member_name memberName, 
+		 * member_age memberAge, 
+		 * member_gender memberGender, 
+		 * update_date updateDate, 
+		 * create_date createDate
+		 * FROM member 
+		 * WHERE member_id LIKE ?
+		 * ORDER BY create_date DESC LIMIT ?,?
+		 */
+		
+		// 쿼리문 작성
+		String sql = "SELECT member_no memberNo, member_id memberId, member_level memberLevel, member_name memberName, member_age memberAge, member_gender memberGender, update_date updateDate, create_date createDate "
+				+ "FROM member WHERE member_id LIKE ? ORDER BY create_date desc LIMIT ?,?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, "%"+searchMemberId+"%");
+		stmt.setInt(2, beginRow);
+		stmt.setInt(3, rowPerPage);
+		ResultSet rs = stmt.executeQuery();
+		while(rs.next()) {
+			Member member = new Member();
+			member.setMemberNo(rs.getInt("memberNo"));
+			member.setMemberId(rs.getString("memberId"));
+			member.setMemberLevel(rs.getInt("memberLevel"));
+			member.setMemberName(rs.getString("memberName"));
+			member.setMemberAge(rs.getInt("memberAge"));
+			member.setMemberGender(rs.getString("memberGender"));
+			member.setUpdateDate(rs.getString("updateDate"));
+			member.setCreateDate(rs.getString("createDate"));
+			list.add(member);
+		}
+		// 연결 끊기
+		rs.close();
+		stmt.close();
+		conn.close();
+		return list;
+		}
+		
+	// [관리자] 라스트 페이지
+	// ISSUE : 검색ID가 있으나 없으나 totalCount 전체
 	public int selectLastPage(int rowPerPage) throws ClassNotFoundException, SQLException {
 		int lastPage = 0;
 		
@@ -51,11 +104,17 @@ public class MemberDao {
 		// 디버깅 코드
 		System.out.println("conn : "+conn);
 		
-		/*
-		 * SELECT member member_no memberNo, member_id memberId, member_level memberLevel, member_name memberName, member_age memberAge,
-		 * member_gender, memberGender, update_date updateDate, create_date, createDate
+		/*		 
+		 * SELECT member_no memberNo,
+		 * member_id memberId,
+		 * member_level memberLevel,
+		 * member_name memberName,
+		 * member_age memberAge,
+		 * member_gender memberGender,
+		 * update_date updateDate,
+		 * create_date createDate
 		 * FROM member
-		 * ORDER BY create_date desc limit ?, ? 
+		 * ORDER BY create_date DESC LIMIT ?,?
 		 */
 		
 		// 쿼리문 작성
@@ -84,7 +143,7 @@ public class MemberDao {
 		return list;
 		}
 	
-	// [비회원]
+	// [비회원] 회원가입
 	public void insertMember(Member member) throws ClassNotFoundException, SQLException {
 		/*
 		 * INSERT INTO member (
@@ -142,6 +201,7 @@ public class MemberDao {
 		 * member
 		 * WHERE member_id=? AND member_pw=PASSWORD(?)
 		 */
+		
 		// 디버깅 코드
 		System.out.println(member.getMemberId()+" <-- MemberDao.login param : memberId");
 		System.out.println(member.getMemberPw()+" <-- MemberDao.login param : memberPw");

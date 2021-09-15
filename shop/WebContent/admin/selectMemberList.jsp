@@ -12,7 +12,16 @@
 		response.sendRedirect(request.getContextPath()+"/index.jsp");
 		return;
 	}
-
+	// 검색어
+	String searchMemberId ="";
+	if(request.getParameter("searchMemberId") != null) {
+		searchMemberId = request.getParameter("searchMemberId");
+	}
+	
+	// 디버깅 코드
+	System.out.println(searchMemberId +"selectMemberList searchmemberId");
+	
+	// 페이지
 	int currentPage = 1;
 	
 	// 페이지 번호가 null이 아니라면 int 타입으로 바꿔서 페이지 번호 사용
@@ -20,12 +29,21 @@
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 	}
 	
+	// 디버깅 코드
+	System.out.println(currentPage +"selectMemberList currentPage");
+	
 	final int ROW_PER_PAGE = 10; // 상수 : rowPerPage 변수는 10으로 초기화되면 끝까지 10이다. 바꾸지 말자.
 	
 	int beginRow = (currentPage - 1) * ROW_PER_PAGE;
 	
 	MemberDao memberDao = new MemberDao();
-	ArrayList<Member> memberList = memberDao.selectMemberListAllByPage(beginRow, ROW_PER_PAGE);
+	ArrayList<Member> memberList = null;
+	// 검색어가 있을 때와 없을 때가 분리
+	if(searchMemberId.equals("") == true) { // 검색어가 있을 때
+		memberList = memberDao.selectMemberListAllByPage(beginRow, ROW_PER_PAGE);
+	} else {
+		memberList = memberDao.selectMemberListAllBysearchMemberID(beginRow, ROW_PER_PAGE, searchMemberId);
+	}
 	
 %>
 <!DOCTYPE html>
@@ -47,6 +65,7 @@
 			<thead>
 				<tr>
 					<th>회원번호</th>
+					<th>회원아이디</th>
 					<th>회원레벨</th>
 					<th>회원이름</th>
 					<th>회원나이</th>
@@ -75,6 +94,7 @@
 						}
 %>
 						</td>
+						<td><%=m.getMemberId()%></td>
 						<td><%=m.getMemberName()%></td>
 						<td><%=m.getMemberAge()%></td>
 						<td><%=m.getMemberGender()%></td>
@@ -89,6 +109,7 @@
 		<br>
 		<div>
 <%
+			// ISSUE : 페이지가 잘 되었는데... 검색한 후 페이징하면 안된다... -> ISSUE 해결
 			int lastPage = memberDao.selectLastPage(ROW_PER_PAGE);
 
 			// 페이지 번호의 갯수
@@ -114,7 +135,7 @@
 			// 이전 버튼
 			if(startPage > nowPage){
 %>
-				<a class="btn btn-success" href="<%=request.getContextPath()%>/admin/selectMemberList.jsp?currentPage=<%=startPage-nowPage%>">이전</a>
+				<a class="btn btn-success" href="<%=request.getContextPath()%>/admin/selectMemberList.jsp?currentPage=<%=startPage-nowPage%>&searchMemberId=<%=searchMemberId%>">이전</a>
 <%
 			}
 		
@@ -122,11 +143,11 @@
 			for(int i=startPage; i<=endPage; i++) {
 				if(endPage < lastPage){
 %>
-					<a class="btn btn-success" href="<%=request.getContextPath()%>/admin/selectMemberList.jsp?currentPage=<%=i%>"><%=i%></a>
+					<a class="btn btn-success" href="<%=request.getContextPath()%>/admin/selectMemberList.jsp?currentPage=<%=i%>&searchMemberId=<%=searchMemberId%>"><%=i%></a>
 <%
 				} else if(endPage>lastPage){
 %>
-					<a class="btn btn-success" href="<%=request.getContextPath()%>/admin/selectMemberList.jsp?currentPage=<%=i%>"><%=i%></a>
+					<a class="btn btn-success" href="<%=request.getContextPath()%>/admin/selectMemberList.jsp?currentPage=<%=i%>&searchMemberId=<%=searchMemberId%>"><%=i%></a>
 <%	
 					break;
 				}
@@ -135,13 +156,22 @@
 			// 다음 버튼
 			if(endPage < lastPage){
 %>
-			<a class="btn btn-success" href="<%=request.getContextPath()%>/admin/selectMemberList.jsp?currentPage=<%=startPage+nowPage%>">다음</a>
+			<a class="btn btn-success" href="<%=request.getContextPath()%>/admin/selectMemberList.jsp?currentPage=<%=startPage+nowPage%>&searchMemberId=<%=searchMemberId%>">다음</a>
 <%
 			}
 %>
-			<a class="btn btn-danger" href="<%=request.getContextPath()%>/admin/selectMemberList.jsp?currentPage=<%=lastPage%>">끝으로</a>
+			<a class="btn btn-danger" href="<%=request.getContextPath()%>/admin/selectMemberList.jsp?currentPage=<%=lastPage%>&searchMemberId=<%=searchMemberId%>">끝으로</a>
 <%
 %>
+		</div>
+		<br>
+			<!-- memberId로 검색  -->
+		<div>
+		<form action="<%=request.getContextPath()%>/admin/selectMemberList.jsp" method="get">
+		아이디 : 
+		<input type="text" name="searchMemberId">
+		<button type="submit" class="btn btn-info">검색</button>
+		</form>
 		</div>
 	</div>
 </body>
