@@ -6,7 +6,8 @@
 <%
 	//인코딩
 	request.setCharacterEncoding("utf-8");
-
+	
+	// 인증 방어 코드
 	Member loginMember = (Member)session.getAttribute("loginMember");
 	if(loginMember == null || loginMember.getMemberLevel() < 1) {
 		response.sendRedirect(request.getContextPath()+"/index.jsp");
@@ -38,6 +39,7 @@
 	
 	MemberDao memberDao = new MemberDao();
 	ArrayList<Member> memberList = null;
+		
 	// 검색어가 있을 때와 없을 때가 분리
 	if(searchMemberId.equals("") == true) { // 검색어가 있을 때
 		memberList = memberDao.selectMemberListAllByPage(beginRow, ROW_PER_PAGE);
@@ -110,8 +112,7 @@
 		<div>
 <%
 			// ISSUE : 페이지가 잘 되었는데... 검색한 후 페이징하면 안된다... -> ISSUE 해결
-			int lastPage = memberDao.selectLastPage(ROW_PER_PAGE);
-
+			int lastPage = memberDao.selectLastPage(ROW_PER_PAGE, searchMemberId);
 			// 페이지 번호의 갯수
 			int nowPage = 10;
 			
@@ -129,7 +130,7 @@
 			
 			//시작 버튼
 %>
-			<a class="btn btn-danger" href="<%=request.getContextPath()%>/admin/selectMemberList.jsp?currentPage=1">처음으로</a>
+			<a class="btn btn-danger" href="<%=request.getContextPath()%>/admin/selectMemberList.jsp?currentPage=1&searchMemberId=<%=searchMemberId%>">처음으로</a>
 <%
 		
 			// 이전 버튼
@@ -140,15 +141,21 @@
 			}
 		
 			// 페이지 번호 버튼
-			for(int i=startPage; i<=endPage; i++) {
-				if(endPage < lastPage){
+			for(int i = startPage; i <= endPage; i++) {
+				if(currentPage == i){
+%>
+					<a class="btn btn-success" href="./selectMemberList.jsp?currentPage=<%=i%>&searchMemberId=<%=searchMemberId%>"><%=i%></a>
+<%	
+				} else if(endPage <= lastPage){
 %>
 					<a class="btn btn-success" href="<%=request.getContextPath()%>/admin/selectMemberList.jsp?currentPage=<%=i%>&searchMemberId=<%=searchMemberId%>"><%=i%></a>
 <%
-				} else if(endPage>lastPage){
+				} else if(endPage > lastPage){
 %>
 					<a class="btn btn-success" href="<%=request.getContextPath()%>/admin/selectMemberList.jsp?currentPage=<%=i%>&searchMemberId=<%=searchMemberId%>"><%=i%></a>
 <%	
+				}
+				if(i == lastPage || lastPage == 0) {	
 					break;
 				}
 			}
@@ -168,8 +175,7 @@
 			<!-- memberId로 검색  -->
 		<div>
 		<form action="<%=request.getContextPath()%>/admin/selectMemberList.jsp" method="get">
-		아이디 : 
-		<input type="text" name="searchMemberId">
+		아이디 : <input type="text" name="searchMemberId">
 		<button type="submit" class="btn btn-info">검색</button>
 		</form>
 		</div>

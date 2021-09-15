@@ -43,6 +43,7 @@ public class MemberDao {
 		stmt.setInt(2, beginRow);
 		stmt.setInt(3, rowPerPage);
 		ResultSet rs = stmt.executeQuery();
+		
 		while(rs.next()) {
 			Member member = new Member();
 			member.setMemberNo(rs.getInt("memberNo"));
@@ -63,9 +64,10 @@ public class MemberDao {
 		}
 		
 	// [관리자] 라스트 페이지
-	// ISSUE : 검색ID가 있으나 없으나 totalCount 전체
-	public int selectLastPage(int rowPerPage) throws ClassNotFoundException, SQLException {
+	// ISSUE : 검색을 했을 때 totalCount 다르게 하기 해결
+	public int selectLastPage(int rowPerPage, String searchMemberId) throws ClassNotFoundException, SQLException {
 		int lastPage = 0;
+		int totalRowCount = 0;
 		
 		// MariaDB 연결
 		DBUtil dbUtil = new DBUtil();
@@ -75,12 +77,22 @@ public class MemberDao {
 		System.out.println("conn : "+conn);
 		
 		// 쿼리문 작성
-		String sql = "SELECT COUNT(*) from member";
+		// 검색한 아이디가 없으면 전체 데이터 수를 출력
+		// 검색한 아이디가 있으면 그 검색한 데이터의 수를 출력
+		String sql = "";
+		if(searchMemberId.equals("") == true) {
+			sql = "SELECT COUNT(*) from member";
+		} else {
+			sql = "SELECT COUNT(*) from member WHERE member_id LIKE '%"+searchMemberId+"%'";
+		}
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		ResultSet rs = stmt.executeQuery();
 		
+		// 디버깅 코드
+		System.out.println("stmt : "+stmt);
+		System.out.println("rs : "+rs);
+		
 		// 토탈 페이지 구하는 코드
-		int totalRowCount = 0;
 		if(rs.next()) {
 			totalRowCount = rs.getInt("COUNT(*)");
 		}
@@ -89,6 +101,10 @@ public class MemberDao {
 			lastPage++;
 		}
 		
+		// 연결 끊기
+		rs.close();
+		stmt.close();
+		conn.close();
 		return lastPage;
 	}
 	
@@ -124,6 +140,11 @@ public class MemberDao {
 		stmt.setInt(1, beginRow);
 		stmt.setInt(2, rowPerPage);
 		ResultSet rs = stmt.executeQuery();
+		
+		// 디버깅 코드
+		System.out.println("stmt : "+stmt);
+		System.out.println("rs : "+rs);
+		
 		while(rs.next()) {
 			Member member = new Member();
 			member.setMemberNo(rs.getInt("memberNo"));
@@ -136,6 +157,7 @@ public class MemberDao {
 			member.setCreateDate(rs.getString("createDate"));
 			list.add(member);
 		}
+		
 		// 연결 끊기
 		rs.close();
 		stmt.close();
@@ -216,6 +238,10 @@ public class MemberDao {
 		stmt.setString(1, member.getMemberId());
 		stmt.setString(2, member.getMemberPw());
 		ResultSet rs = stmt.executeQuery();
+		
+		// 디버깅 코드
+		System.out.println("stmt : "+stmt);
+		System.out.println("rs : "+rs);
 		
 		if(rs.next()) {
 			Member returnMember = new Member();
