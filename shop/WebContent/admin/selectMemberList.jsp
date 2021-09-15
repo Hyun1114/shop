@@ -108,13 +108,13 @@
 			
 			//시작 버튼
 %>
-			<a class="btn btn-danger" href="./selectMemberList.jsp?currentPage=1">처음으로</a>
+			<a class="btn btn-danger" href="<%=request.getContextPath()%>/admin/selectMemberList.jsp?currentPage=1">처음으로</a>
 <%
 		
 			// 이전 버튼
 			if(startPage > nowPage){
 %>
-				<a class="btn btn-success" href="./selectMemberList.jsp?currentPage=<%=startPage-nowPage%>">이전</a>
+				<a class="btn btn-success" href="<%=request.getContextPath()%>/admin/selectMemberList.jsp?currentPage=<%=startPage-nowPage%>">이전</a>
 <%
 			}
 		
@@ -122,11 +122,11 @@
 			for(int i=startPage; i<=endPage; i++) {
 				if(endPage < lastPage){
 %>
-					<a class="btn btn-success" href="./selectMemberList.jsp?currentPage=<%=i%>"><%=i%></a>
+					<a class="btn btn-success" href="<%=request.getContextPath()%>/admin/selectMemberList.jsp?currentPage=<%=i%>"><%=i%></a>
 <%
 				} else if(endPage>lastPage){
 %>
-					<a class="btn btn-success" href="./selectMemberList.jsp?currentPage=<%=i%>"><%=i%></a>
+					<a class="btn btn-success" href="<%=request.getContextPath()%>/admin/selectMemberList.jsp?currentPage=<%=i%>"><%=i%></a>
 <%	
 					break;
 				}
@@ -135,11 +135,11 @@
 			// 다음 버튼
 			if(endPage < lastPage){
 %>
-			<a class="btn btn-success" href="./selectMemberList.jsp?currentPage=<%=startPage+nowPage%>">다음</a>
+			<a class="btn btn-success" href="<%=request.getContextPath()%>/admin/selectMemberList.jsp?currentPage=<%=startPage+nowPage%>">다음</a>
 <%
 			}
 %>
-			<a class="btn btn-danger" href="./selectMemberList.jsp?currentPage=<%=lastPage%>">끝으로</a>
+			<a class="btn btn-danger" href="<%=request.getContextPath()%>/admin/selectMemberList.jsp?currentPage=<%=lastPage%>">끝으로</a>
 <%
 %>
 		</div>
