@@ -10,6 +10,80 @@ import commons.DBUtil;
 import vo.Member;
 
 public class MemberDao {
+	// MemberNo + 수정된 MemberLevel -> MeberLevel
+	public void updateMemberLevelByAdmin(Member member, int memberNewLevel) throws SQLException, ClassNotFoundException {
+		
+		// MariaDB 연결
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+				
+		// 디버깅 코드
+		System.out.println("conn : "+conn);
+		
+		// 쿼리문 작성
+		String sql = "UPDATE member SET member_level=? WHERE member_no=?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, memberNewLevel);
+		stmt.setInt(2, member.getMemberNo());
+		stmt.executeUpdate();
+		
+		// 디버깅 코드
+		System.out.println("stmt : "+stmt);
+		
+		// 연결 끊기
+		stmt.close();
+		conn.close();
+	}
+ 	
+	// MemberNo + 수정된 MemberPw -> MeberPw
+	public void updateMemberPwByAdmin(Member member, String memberNewPw) throws ClassNotFoundException, SQLException {
+		
+		// MariaDB 연결
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+				
+		// 디버깅 코드
+		System.out.println("conn : "+conn);
+		
+		String sql = "UPDATE member SET member_pw=PASSWORD(?) WHERE member_no=?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, memberNewPw);
+		stmt.setInt(2, member.getMemberNo());
+		stmt.executeUpdate();
+		
+		// 디버깅 코드
+		System.out.println("stmt : "+stmt);
+		
+		// 연결 끊기
+		stmt.close();
+		conn.close();
+	}
+	
+	
+	// MemberNo를 불러와서 삭제
+	public void deleteMemberByAdmin(int memberNo) throws ClassNotFoundException, SQLException {
+		
+		// MariaDB 연결
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		
+		// 디버깅 코드
+		System.out.println("conn : "+conn);
+		
+		// 쿼리문 작성
+		String sql = "DELETE FROM member WHERE member_no=?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, memberNo);
+		stmt.executeUpdate();
+		
+		// 디버깅 코드
+		System.out.println("stmt : "+stmt);
+		
+		// 연결 끊기
+		stmt.close();
+		conn.close();
+	}
+	
 	// [관리자] 회원목록 출력
 	public ArrayList<Member> selectMemberListAllBysearchMemberID(int beginRow, int rowPerPage, String searchMemberId) throws ClassNotFoundException, SQLException {
 		ArrayList<Member> list = new ArrayList<Member>();
