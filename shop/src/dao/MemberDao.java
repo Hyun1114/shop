@@ -10,6 +10,43 @@ import commons.DBUtil;
 import vo.Member;
 
 public class MemberDao {
+	// 상세보기 페이지
+	public Member selectMemeberOne(int memberNo) throws ClassNotFoundException, SQLException {
+		Member member = null;
+		// MariaDB 연결
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		
+		// 디버깅 코드
+		System.out.println("conn : "+conn);
+		
+		// 쿼리문 작성
+		String sql = "SELECT member_no memberNo, member_id memberId, member_pw memberPw, member_level memberLevel, member_name memberName, member_age memberAge, member_gender memberGender, update_date updateDate, create_date createDate FROM member WHERE member_no=?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, memberNo);
+		ResultSet rs = stmt.executeQuery();
+		// 디버깅 코드
+		System.out.println("stmt : "+stmt);
+		
+		while(rs.next()) {
+			member = new Member();
+			member.setMemberNo(rs.getInt("memberNo"));
+			member.setMemberId(rs.getString("memberId"));
+			member.setMemberId(rs.getString("memberPw"));
+			member.setMemberLevel(rs.getInt("memberLevel"));
+			member.setMemberName(rs.getString("memberName"));
+			member.setMemberAge(rs.getInt("memberAge"));
+			member.setMemberGender(rs.getString("memberGender"));
+			member.setUpdateDate(rs.getString("updateDate"));
+			member.setCreateDate(rs.getString("createDate"));
+			return member;
+		}
+		// 연결 끊기
+		rs.close();
+		stmt.close();
+		conn.close();
+		return member;
+	}
 	// MemberNo + 수정된 MemberLevel -> MeberLevel
 	public void updateMemberLevelByAdmin(Member member, int memberNewLevel) throws SQLException, ClassNotFoundException {
 		

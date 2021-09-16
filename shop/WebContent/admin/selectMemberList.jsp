@@ -85,6 +85,7 @@
 %>
 					<tr>
 						<td><%=m.getMemberNo()%></td>
+						<td><%=m.getMemberId()%></td>
 						<td>
 						 <%=m.getMemberLevel()%>
 <%
@@ -99,7 +100,6 @@
 						}
 %>
 						</td>
-						<td><%=m.getMemberId()%></td>
 						<td><%=m.getMemberName()%></td>
 						<td><%=m.getMemberAge()%></td>
 						<td><%=m.getMemberGender()%></td>
