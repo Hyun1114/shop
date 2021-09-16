@@ -17,11 +17,14 @@
 	int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 	
 	// 디버깅 코드
-	System.out.println("memberNo"+memberNo);
+	System.out.println("memberNo"+ memberNo);
 	
 	// 데이터 불러오기
 	MemberDao memberDao = new MemberDao();
 	memberDao.deleteMemberByAdmin(memberNo);
+	
+	// 페이지 이동
+	response.sendRedirect(request.getContextPath()+"/admin/selectMemberList.jsp");
 %>
 </body>
 </html>

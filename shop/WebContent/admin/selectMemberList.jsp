@@ -76,7 +76,7 @@
 					<th>생성날짜</th>
 					<th>등급수정</th>
 					<th>비밀번호수정</th>
-					<th>회원 탈퇴</th>
+					<th>회원탈퇴</th>
 				</tr>		
 			</thead>
 			<tbody>
