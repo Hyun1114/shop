@@ -10,9 +10,47 @@ import commons.DBUtil;
 import vo.Member;
 
 public class MemberDao {
-	// 상세보기 페이지
+	
+	// [회원] 아이디 중복검사
+	public String SelectMemberId(String memberIdCheck) throws SQLException, ClassNotFoundException {
+		
+		// 변수 선언
+		String memberId = null;
+		
+		// MariaDB 연결
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+				
+		// 디버깅 코드
+		System.out.println("conn : "+conn);
+		
+		// 쿼리문 작성
+		String sql = "SELECT member_id memberId FROM member WHERE member_id=?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, memberIdCheck);
+		ResultSet rs = stmt.executeQuery();
+		
+		// memberId 값 넣기
+		if(rs.next()) {
+			memberId = rs.getString("memberId");
+		}
+		
+		// 연결 끊기
+		rs.close();
+		stmt.close();
+		conn.close();
+		
+		// null이 나오면 사용가능한 아이디
+		// null이 아니면 이미 사용중인 아이디
+		return memberId;
+	}
+	
+	// [관리자] 상세보기 페이지
 	public Member selectMemeberOne(int memberNo) throws ClassNotFoundException, SQLException {
+		
+		// 변수 선언
 		Member member = null;
+		
 		// MariaDB 연결
 		DBUtil dbUtil = new DBUtil();
 		Connection conn = dbUtil.getConnection();
@@ -25,9 +63,11 @@ public class MemberDao {
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, memberNo);
 		ResultSet rs = stmt.executeQuery();
+		
 		// 디버깅 코드
 		System.out.println("stmt : "+stmt);
 		
+		// member 변수에 값 넣기
 		while(rs.next()) {
 			member = new Member();
 			member.setMemberNo(rs.getInt("memberNo"));
@@ -41,12 +81,14 @@ public class MemberDao {
 			member.setCreateDate(rs.getString("createDate"));
 			return member;
 		}
+		
 		// 연결 끊기
 		rs.close();
 		stmt.close();
 		conn.close();
 		return member;
 	}
+	// [관리자] 회원 레벨 수정
 	// MemberNo + 수정된 MemberLevel -> MeberLevel
 	public void updateMemberLevelByAdmin(Member member, int memberNewLevel) throws SQLException, ClassNotFoundException {
 		
@@ -71,7 +113,7 @@ public class MemberDao {
 		stmt.close();
 		conn.close();
 	}
- 	
+ 	// [관리자] 회원 비밀번호 수정
 	// MemberNo + 수정된 MemberPw -> MeberPw
 	public void updateMemberPwByAdmin(Member member, String memberNewPw) throws ClassNotFoundException, SQLException {
 		
@@ -96,7 +138,7 @@ public class MemberDao {
 		conn.close();
 	}
 	
-	
+	// [관리자] 회원 강제 탈퇴
 	// MemberNo를 불러와서 삭제
 	public void deleteMemberByAdmin(int memberNo) throws ClassNotFoundException, SQLException {
 		

@@ -11,8 +11,8 @@
 	String memberPw = request.getParameter("memberPw");
 	
 	// 디버깅 코드
-	System.out.println(memberId+ "<-- memberId");
-	System.out.println(memberPw+ "<-- memberPw");
+	System.out.println(memberId+ " <-- memberId");
+	System.out.println(memberPw+ " <-- memberPw");
 	
 	// 데이터 불러오기
 	MemberDao memberDao = new MemberDao();

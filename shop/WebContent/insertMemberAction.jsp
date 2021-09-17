@@ -19,7 +19,7 @@
 		return;
 	}
 	
-	// 회원가입 입력값 검사
+	// 회원가입 입력값 검사(null일 때 검사)
 		if(request.getParameter("memberId") == null || request.getParameter("memberPw") == null || request.getParameter("memberName") == null 
 				|| request.getParameter("memberAge") == null || request.getParameter("memberGender") == null ) {		
 			// 다시 브라우저에게 다른 곳을 요청
@@ -27,6 +27,7 @@
 			return;
 		}
 	
+	// 회원가입 입력값 검사(공백일 때 검사)
 	if(request.getParameter("memberId").equals("") || request.getParameter("memberPw").equals("") || request.getParameter("memberName").equals("")
 			|| request.getParameter("memberAge").equals("") || request.getParameter("memberGender").equals("")) {		
 		// 다시 브라우저에게 다른 곳을 요청

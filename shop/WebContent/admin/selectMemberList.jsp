@@ -13,6 +13,7 @@
 		response.sendRedirect(request.getContextPath()+"/index.jsp");
 		return;
 	}
+	
 	// 검색어
 	String searchMemberId ="";
 	if(request.getParameter("searchMemberId") != null) {
@@ -20,7 +21,7 @@
 	}
 	
 	// 디버깅 코드
-	System.out.println(searchMemberId +"selectMemberList searchmemberId");
+	System.out.println(searchMemberId +" <-- selectMemberList searchmemberId");
 	
 	// 페이지
 	int currentPage = 1;
@@ -31,7 +32,7 @@
 	}
 	
 	// 디버깅 코드
-	System.out.println(currentPage +"selectMemberList currentPage");
+	System.out.println(currentPage +" <-- selectMemberList currentPage");
 	
 	final int ROW_PER_PAGE = 10; // 상수 : rowPerPage 변수는 10으로 초기화되면 끝까지 10이다. 바꾸지 말자.
 	
@@ -68,7 +69,7 @@
 				<tr>
 					<th>회원번호</th>
 					<th>회원아이디</th>
-					<th>회원레벨</th>
+					<th>회원등급</th>
 					<th>회원이름</th>
 					<th>회원나이</th>
 					<th>회원성별</th>
@@ -91,11 +92,11 @@
 <%
 						if(m.getMemberLevel() == 0) {
 %>
-							<span>일반회원</span>
+							<span> : 일반회원</span>
 <%							
 						} else if(m.getMemberLevel() == 1) {
 %>							
-							<span>관리자</span>
+							<span> : 관리자</span>
 <%							
 						}
 %>
@@ -107,15 +108,15 @@
 						<td><%=m.getCreateDate()%></td>
 						<td>
 							<!-- 특정회원의 등급을 수정 -->
-							<a href="<%=request.getContextPath()%>/admin/updateMemberLevelForm.jsp?memberNo=<%=m.getMemberNo()%>">등급수정</a>
+							<a class="btn btn-outline-primary" href="<%=request.getContextPath()%>/admin/updateMemberLevelForm.jsp?memberNo=<%=m.getMemberNo()%>">등급수정</a>
 						</td>
 						<td>
 							<!-- 특정회원의 비밀 번호를 수정 -->
-							<a href="<%=request.getContextPath()%>/admin/updateMemberPwForm.jsp?memberNo=<%=m.getMemberNo()%>">비밀번호수정</a>
+							<a class="btn btn-outline-primary" href="<%=request.getContextPath()%>/admin/updateMemberPwForm.jsp?memberNo=<%=m.getMemberNo()%>">비밀번호수정</a>
 						</td>
 						<td>
 							<!-- 특정회원을 강제 탈퇴 -->
-							<a href="<%=request.getContextPath()%>/admin/deleteMember.jsp?memberNo=<%=m.getMemberNo()%>">강제탈퇴</a>
+							<a class="btn btn-outline-danger" href="<%=request.getContextPath()%>/admin/deleteMember.jsp?memberNo=<%=m.getMemberNo()%>">강제탈퇴</a>
 						</td>
 					</tr>
 <%

@@ -30,8 +30,15 @@
 			<!-- 로그인 -->
 			<div class="text-white"><%=loginMember.getMemberName()%>님 반갑습니다.</div><br>
 			<div><a class="btn btn-outline-danger" href="<%=request.getContextPath() %>/logout.jsp">로그아웃</a></div><br>
-			<div><a class="btn btn-outline-info" href="<%=request.getContextPath() %>/selectMemberOne.jsp">회원정보</a></div><br>
 <%
+			if(loginMember.getMemberLevel() == 0) {
+%>
+				<!-- 회원정보 페이지로 가는 링크 -->
+				<div><a class="btn btn-outline-info" href="<%=request.getContextPath() %>/selectMemberOne.jsp">회원정보</a></div><br>
+<%				
+			}
+%>
+<%	
 			if(loginMember.getMemberLevel() > 0) {
 %>
 				<!-- 관리자 페이지로 가는 링크 -->
