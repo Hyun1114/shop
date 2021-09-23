@@ -34,7 +34,7 @@
 			<jsp:include page="/partial/adminMenu.jsp"></jsp:include>
 		</div>
 		<!-- end :  adminMenu include -->
-		<h1>카테고리 목록</h1>
+		<h1>전자책 카테고리 관리</h1>
 		<table border="1" style="margin:auto">
 			<thead>
 				<tr>
