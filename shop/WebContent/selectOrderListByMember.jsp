@@ -37,7 +37,6 @@
 				<tr>
 					<th>주문 번호</th>
 					<th>전차책 제목</th>
-					<th>회원 번호</th>
 					<th>전자책 가격</th>
 					<th>주문 날짜</th>
 					<th>상세 주문 내역</th>
@@ -52,11 +51,10 @@
 						<!-- 체인 방법 -->
 						<td><%=oem.getOrder().getOrderNo()%></td>
 						<td><%=oem.getEbook().getEbookTitle()%></td>
-						<td><%=oem.getMember().getMemberNo()%></td>
 						<td><%=oem.getOrder().getOrderPrice()%></td>
 						<td><%=oem.getOrder().getCreateDate()%></td>
-						<td><a class="btn btn-outline-primary" href="<%=request.getContextPath() %>/admin/selectOrderOne.jsp?OrderNo=<%=oem.getOrder().getOrderNo()%>">주문 내역</a></td>
-						<td><a class="btn btn-outline-primary" href="">후기</a></td>
+						<td><a class="btn btn-outline-primary" href="<%=request.getContextPath() %>/admin/selectOrderOne.jsp?orderNo=<%=oem.getOrder().getOrderNo()%>">주문 내역</a></td>
+						<td><a class="btn btn-outline-primary"href="<%=request.getContextPath() %>/insertOrderCommentForm.jsp?orderNo=<%=oem.getOrder().getOrderNo()%>&ebookNo=<%=oem.getEbook().getEbookNo()%>">후기 작성</a></td>
 <%					
 				}
 %>
