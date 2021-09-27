@@ -96,13 +96,14 @@
 							<tr>
 								<td><%=e.getEbookNo()%></td>
 								<td><%=e.getCategoryName()%></td>
-								<td><%=e.getEbookTitle()%></td>
+								<td><a href="<%=request.getContextPath() %>/admin/selectEbookOne.jsp?ebookNo=<%=e.getEbookNo() %>"><%=e.getEbookTitle() %></a></td>
 								<td><%=e.getEbookState()%></td>
 <%
 						}
 %>
 					</tbody>
-				</table>	
+				</table>
+				<br><a class="btn btn-outline-primary" href="<%=request.getContextPath()%>/admin/insertEbookForm.jsp">전자책 추가</a>
 			</div>
 			<div>
 <%

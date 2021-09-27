@@ -24,6 +24,7 @@
 	<div>
 	<h1>관리자 페이지</h1>
 	<div class="text-white"><%=loginMember.getMemberId()%>님 반갑습니다.</div><br>
+	<div><a class="btn btn-outline-success" href="<%=request.getContextPath() %>/index.jsp">이전</a></div>
 	</div>
 </div>
 </body>
