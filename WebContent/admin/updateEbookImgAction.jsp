@@ -22,7 +22,7 @@
 	// System.out.println(ebookNo + " < -- ebookNo");
 	// multipart/form-data로 넘겼기 때문에 사용할 수 없다.
 	// request, 파일 경로, 파일 크기, 인코딩, 중복변수
-	MultipartRequest mr = new MultipartRequest(request, "D:/Git-Shop/shop/WebContent/image", 1024*1024*1024, "utf-8", new DefaultFileRenamePolicy());
+	MultipartRequest mr = new MultipartRequest(request, "D:/Project/shop/WebContent/image", 1024*1024*1024, "utf-8", new DefaultFileRenamePolicy());
 	int ebookNo = Integer.parseInt(mr.getParameter("ebookNo"));
 	String ebookImg = mr.getFilesystemName("ebookImg");
 	

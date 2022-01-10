@@ -10,6 +10,47 @@ import commons.DBUtil;
 import vo.Ebook;
 
 public class EbookDao {
+	
+	// [회원] 메인 전자책 리스트(4개)
+	public ArrayList<Ebook> selectEbookListByMain() throws SQLException, ClassNotFoundException {
+		
+		// ArrayList 생성
+		ArrayList<Ebook> list = new ArrayList<>();
+		
+		// MariaDB 연결
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		
+		// 디버깅 코드
+		System.out.println("conn : "+conn);
+		
+		// 쿼리문 작성
+		String sql = "SELECT ebook_no ebookNo, category_name categoryName, ebook_title ebookTitle, ebook_img ebookImg, ebook_price ebookPrice, ebook_state ebookState FROM ebook ORDER BY create_date DESC LIMIT 0, 4";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		ResultSet rs = stmt.executeQuery();
+		
+		// 디버깅 코드	
+		System.out.println("stmt : "+stmt);
+		
+		// 카테고리 값 가져오기
+		while(rs.next()) {
+		Ebook ebook = new Ebook();
+		ebook.setEbookNo(rs.getInt("ebookNo"));
+		ebook.setCategoryName(rs.getString("categoryName"));
+		ebook.setEbookImg(rs.getString("ebookImg"));
+		ebook.setEbookPrice(rs.getInt("ebookPrice"));
+		ebook.setEbookTitle(rs.getString("ebookTitle"));
+		ebook.setEbookState(rs.getString("ebookState"));
+		list.add(ebook);
+		}
+		
+		// 연결 끊기
+		rs.close();
+		stmt.close();
+		conn.close();
+		return list;
+	}
+	
 	// [관리자] 전자책 추가
 	public void insertEbook(Ebook ebook) throws ClassNotFoundException, SQLException {
 		
@@ -62,7 +103,7 @@ public class EbookDao {
 		*/
 		
 		// 쿼리문 작성
-		String sql = "SELECT ebook_no ebookNo, ebook_title ebookTitle, ebook_img ebookImg, ebook_price ebookPrice FROM ebook ORDER BY create_date DESC LIMIT 0, 5";
+		String sql = "SELECT ebook_no ebookNo, ebook_title ebookTitle, ebook_img ebookImg, ebook_price ebookPrice FROM ebook ORDER BY create_date DESC LIMIT 0, 4";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		ResultSet rs = stmt.executeQuery();
 		
@@ -111,7 +152,7 @@ public class EbookDao {
 		*/
 		
 		// 쿼리문 작성
-		String sql = "SELECT t.ebook_no ebookNo, e.ebook_title ebookTitle, e.ebook_img ebookImg, e.ebook_price ebookPrice FROM ebook e INNER JOIN (SELECT ebook_no, COUNT(ebook_no) FROM orders GROUP BY ebook_no ORDER BY COUNT(ebook_no) DESC LIMIT 0, 5) t ON e.ebook_no = t.ebook_no";
+		String sql = "SELECT t.ebook_no ebookNo, e.ebook_title ebookTitle, e.ebook_img ebookImg, e.ebook_price ebookPrice FROM ebook e INNER JOIN (SELECT ebook_no, COUNT(ebook_no) FROM orders GROUP BY ebook_no ORDER BY COUNT(ebook_no) DESC LIMIT 0, 4) t ON e.ebook_no = t.ebook_no";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		ResultSet rs = stmt.executeQuery();
 		
