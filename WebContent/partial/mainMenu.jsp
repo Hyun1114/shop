@@ -26,7 +26,7 @@
     <div class="main_menu">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-          <a class="navbar-brand logo_h" href="index.jsp">EBS</a>
+          <a class="navbar-brand logo_h" href="<%=request.getContextPath()%>/index.jsp">EBS</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="icon-bar"></span>
@@ -61,7 +61,7 @@
 			Member loginMember = (Member)session.getAttribute("loginMember");
 %>
 			<!-- 로그인 -->
-			<a class="button button-header" href="<%=request.getContextPath() %>/logout.jsp">logout</a><br>
+			<a class="button button-header" href="<%=request.getContextPath() %>/logout.jsp">로그아웃</a><br>
 <%
 			if(loginMember.getMemberLevel() == 0) {
 %>

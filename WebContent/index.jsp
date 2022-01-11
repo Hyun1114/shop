@@ -22,10 +22,10 @@
 </head>
 <body>
 	<!-- start :  sub menu include -->
-		<div>
-			<jsp:include page="/partial/mainMenu.jsp"></jsp:include>
-		</div>
-		<!-- end : sub menu include -->
+	<div>
+		<jsp:include page="/partial/mainMenu.jsp"></jsp:include>
+	</div>
+	<!-- end : sub menu include -->
 	
 	<!-- 상품 목록 출력 -->
 <%
