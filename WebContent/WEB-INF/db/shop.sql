@@ -14,12 +14,10 @@
 
 
 -- shop 데이터베이스 구조 내보내기
-DROP DATABASE IF EXISTS `shop`;
 CREATE DATABASE IF NOT EXISTS `shop` /*!40100 DEFAULT CHARACTER SET utf8mb3 */;
 USE `shop`;
 
 -- 테이블 shop.category 구조 내보내기
-DROP TABLE IF EXISTS `category`;
 CREATE TABLE IF NOT EXISTS `category` (
   `category_name` varchar(200) NOT NULL,
   `update_date` datetime NOT NULL,
@@ -42,7 +40,6 @@ INSERT INTO `category` (`category_name`, `update_date`, `create_date`, `category
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 
 -- 테이블 shop.ebook 구조 내보내기
-DROP TABLE IF EXISTS `ebook`;
 CREATE TABLE IF NOT EXISTS `ebook` (
   `ebook_no` int(11) NOT NULL AUTO_INCREMENT,
   `ebook_isbn` char(13) NOT NULL,
@@ -66,16 +63,16 @@ CREATE TABLE IF NOT EXISTS `ebook` (
 DELETE FROM `ebook`;
 /*!40000 ALTER TABLE `ebook` DISABLE KEYS */;
 INSERT INTO `ebook` (`ebook_no`, `ebook_isbn`, `category_name`, `ebook_title`, `ebook_author`, `ebook_company`, `ebook_page_count`, `ebook_price`, `ebook_img`, `ebook_summary`, `ebook_state`, `create_date`, `update_date`) VALUES
-	(1, '313025204-5', '종교', 'Tin', 'Tammie', 'Shufflebeat', 764, 22333, 'noimage.png', 'dignissim vestibulum vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae', '판매중', '2020-12-09 00:00:00', '2021-09-23 00:00:00'),
+	(1, '313025204-5', '종교', 'Tin', 'Tammie', 'Shufflebeat', 764, 22333, 'amond.jpg', 'dignissim vestibulum vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae', '판매중', '2020-12-09 00:00:00', '2021-09-23 00:00:00'),
 	(2, '602868749-9', '종교', 'It', 'Jerrilee', 'Livetube', 626, 19832, 'noimage.png', 'ultrices aliquet maecenas leo odio condimentum id luctus nec molestie sed justo', '구편절판', '2020-12-21 00:00:00', '2021-09-23 00:00:00'),
 	(3, '155255289-6', '여행', 'Fintone', 'Hermia', 'Thoughtmix', 841, 11769, 'noimage.png', 'non ligula pellentesque ultrices phasellus id sapien in sapien iaculis congue vivamus metus arcu adipiscing molestie hendrerit', '판매중', '2021-05-12 00:00:00', '2021-09-23 00:00:00'),
-	(4, '342334441-5', '여행', 'Namfix', 'Tera', 'Voonder', 131, 29822, 'noimage.png', 'curae duis faucibus accumsan odio curabitur convallis duis consequat dui nec nisi volutpat eleifend', '절판', '2021-08-07 00:00:00', '2021-09-23 00:00:00'),
+	(4, '342334441-5', '여행', 'Namfix', 'Tera', 'Voonder', 131, 29822, 'bong.jpg', 'curae duis faucibus accumsan odio curabitur convallis duis consequat dui nec nisi volutpat eleifend', '절판', '2021-08-07 00:00:00', '2021-09-23 00:00:00'),
 	(5, '800740015-X', '만화', 'Span', 'Roldan', 'Meedoo', 987, 9713, 'noimage.png', 'id luctus nec molestie sed justo pellentesque viverra pede ac diam cras pellentesque volutpat dui maecenas tristique est', '절판', '2021-09-06 00:00:00', '2021-09-23 00:00:00'),
-	(6, '057228380-6', '소설', 'Zathin', 'Jemmie', 'Bluezoom', 963, 27483, 'noimage.png', 'nec nisi volutpat eleifend donec ut dolor morbi vel lectus in quam fringilla rhoncus mauris', '품절', '2020-11-03 00:00:00', '2021-09-23 00:00:00'),
+	(6, '057228380-6', '소설', 'Zathin', 'Jemmie', 'Bluezoom', 963, 27483, 'ggo.jpg', 'nec nisi volutpat eleifend donec ut dolor morbi vel lectus in quam fringilla rhoncus mauris', '품절', '2020-11-03 00:00:00', '2021-09-23 00:00:00'),
 	(7, '213214994-1', '여행', 'Solarbreeze', 'Giuseppe', 'Kanoodle', 386, 27278, 'noimage.png', 'dolor sit amet consectetuer adipiscing elit proin interdum mauris non ligula pellentesque ultrices phasellus', '절판', '2021-05-01 00:00:00', '2021-09-23 00:00:00'),
 	(8, '154213836-1', '종교', 'Ventosanzap', 'Beaufort', 'Tekfly', 493, 17245, 'noimage.png', 'nulla eget eros elementum pellentesque quisque porta volutpat erat quisque erat eros viverra eget congue eget semper rutrum nulla nunc', '판매중', '2020-11-28 00:00:00', '2021-09-23 00:00:00'),
 	(9, '924361015-5', '여행', 'Span', 'Alano', 'Aimbo', 822, 24762, 'noimage.png', 'eget elit sodales scelerisque mauris sit amet eros suspendisse accumsan tortor quis turpis sed ante vivamus tortor', '절판', '2021-02-19 00:00:00', '2021-09-23 00:00:00'),
-	(10, '336711318-2', '외국어', 'Bigtax', 'Leighton', 'Kwideo', 726, 29832, 'noimage.png', 'et ultrices posuere cubilia curae nulla dapibus dolor vel est donec odio justo sollicitudin', '절판', '2021-05-07 00:00:00', '2021-09-23 00:00:00'),
+	(10, '336711318-2', '외국어', 'Bigtax', 'Leighton', 'Kwideo', 726, 29832, 'na.jpg', 'et ultrices posuere cubilia curae nulla dapibus dolor vel est donec odio justo sollicitudin', '절판', '2021-05-07 00:00:00', '2021-09-23 00:00:00'),
 	(11, '526410467-0', '소설', 'Ventosanzap', 'Blaire', 'Fadeo', 661, 20071, 'noimage.png', 'dictumst etiam faucibus cursus urna ut tellus nulla ut erat id', '구편절판', '2021-07-24 00:00:00', '2021-09-23 00:00:00'),
 	(12, '501042963-2', '종교', 'Sub-Ex', 'Mark', 'Yacero', 553, 19593, 'noimage.png', 'sit amet nulla quisque arcu libero rutrum ac lobortis vel dapibus at diam', '절판', '2020-12-21 00:00:00', '2021-09-23 00:00:00'),
 	(13, '538127261-8', '여행', 'Span', 'Abdul', 'Babbleblab', 140, 19238, 'noimage.png', 'turpis adipiscing lorem vitae mattis nibh ligula nec sem duis aliquam convallis nunc', '절판', '2021-02-17 00:00:00', '2021-09-23 00:00:00'),
@@ -132,7 +129,7 @@ INSERT INTO `ebook` (`ebook_no`, `ebook_isbn`, `category_name`, `ebook_title`, `
 	(64, '936918923-8', '외국어', 'Redhold', 'Clem', 'Dynabox', 248, 7778, 'noimage.png', 'sapien varius ut blandit non interdum in ante vestibulum ante ipsum primis in faucibus orci luctus', '품절', '2021-04-19 00:00:00', '2021-09-23 00:00:00'),
 	(65, '501849354-2', '소설', 'Konklab', 'Margret', 'Browsebug', 551, 20071, 'noimage.png', 'justo nec condimentum neque sapien placerat ante nulla justo aliquam quis turpis', '판매중', '2020-12-04 00:00:00', '2021-09-23 00:00:00'),
 	(66, '183744598-2', '외국어', 'Bitwolf', 'Birch', 'Realpoint', 897, 24684, 'noimage.png', 'imperdiet nullam orci pede venenatis non sodales sed tincidunt eu felis fusce posuere felis sed lacus morbi', '구편절판', '2021-07-18 00:00:00', '2021-09-23 00:00:00'),
-	(67, '077665060-2', '외국어', 'Zaam-Dox', 'Gratiana', 'Avaveo', 842, 9321, 'noimage.png', 'mi integer ac neque duis bibendum morbi non quam nec dui luctus rutrum nulla tellus in sagittis', '품절', '2021-09-21 00:00:00', '2021-09-23 00:00:00'),
+	(67, '077665060-2', '외국어', 'Zaam-Dox', 'Gratiana', 'Avaveo', 842, 9321, 'doll.jpg', 'mi integer ac neque duis bibendum morbi non quam nec dui luctus rutrum nulla tellus in sagittis', '품절', '2021-09-21 00:00:00', '2021-09-23 00:00:00'),
 	(68, '122457829-5', '외국어', 'Zamit', 'Fern', 'Brainverse', 339, 24337, 'noimage.png', 'sapien non mi integer ac neque duis bibendum morbi non quam nec dui luctus rutrum nulla tellus', '품절', '2021-06-29 00:00:00', '2021-09-23 00:00:00'),
 	(69, '514691577-6', '만화', 'Domainer', 'Debee', 'Twitterwire', 143, 29897, 'noimage.png', 'eu sapien cursus vestibulum proin eu mi nulla ac enim in tempor turpis nec euismod scelerisque', '구편절판', '2021-06-16 00:00:00', '2021-09-23 00:00:00'),
 	(70, '742991093-9', '만화', 'Holdlamis', 'Ursala', 'Voonix', 629, 17073, 'noimage.png', 'interdum venenatis turpis enim blandit mi in porttitor pede justo eu massa donec', '판매중', '2020-09-26 00:00:00', '2021-09-23 00:00:00'),
@@ -185,7 +182,7 @@ INSERT INTO `ebook` (`ebook_no`, `ebook_isbn`, `category_name`, `ebook_title`, `
 	(117, '072016220-3', '외국어', 'Asoka', 'Laurie', 'Jabbercube', 903, 18979, 'noimage.png', 'dui proin leo odio porttitor id consequat in consequat ut nulla sed', '절판', '2021-04-19 00:00:00', '2021-09-23 00:00:00'),
 	(118, '559335870-2', '여행', 'Kanlam', 'Ernestine', 'Tagchat', 939, 9246, 'noimage.png', 'nulla tellus in sagittis dui vel nisl duis ac nibh fusce lacus purus aliquet', '절판', '2021-03-06 00:00:00', '2021-09-23 00:00:00'),
 	(119, '758240715-6', '경제', 'Cardguard', 'Jimmy', 'Browsebug', 347, 23835, 'noimage.png', 'ut tellus nulla ut erat id mauris vulputate elementum nullam varius nulla facilisi', '절판', '2021-05-11 00:00:00', '2021-09-23 00:00:00'),
-	(120, '635608738-2', '종교', 'Bigtax', 'Minetta', 'Bubblemix', 553, 17808, 'noimage.png', 'primis in faucibus orci luctus et ultrices posuere cubilia curae donec pharetra', '판매중', '2021-09-22 00:00:00', '2021-09-23 00:00:00'),
+	(120, '635608738-2', '종교', 'Bigtax', 'Minetta', 'Bubblemix', 553, 17808, 'ohbe.JPG', 'primis in faucibus orci luctus et ultrices posuere cubilia curae donec pharetra', '판매중', '2021-09-22 00:00:00', '2021-09-23 00:00:00'),
 	(121, '609599654-6', '미술', 'Tampflex', 'Correna', 'Meezzy', 460, 11983, 'noimage.png', 'semper interdum mauris ullamcorper purus sit amet nulla quisque arcu libero rutrum ac lobortis vel', '절판', '2021-01-13 00:00:00', '2021-09-23 00:00:00'),
 	(122, '080020966-4', '외국어', 'Latlux', 'Ashleigh', 'Skyba', 821, 29859, 'noimage.png', 'nulla mollis molestie lorem quisque ut erat curabitur gravida nisi at nibh', '품절', '2021-07-06 00:00:00', '2021-09-23 00:00:00'),
 	(123, '716740782-8', '미술', 'Domainer', 'Lisha', 'Fadeo', 419, 18391, 'noimage.png', 'molestie sed justo pellentesque viverra pede ac diam cras pellentesque volutpat dui maecenas tristique est et', '절판', '2021-08-15 00:00:00', '2021-09-23 00:00:00'),
@@ -503,7 +500,7 @@ INSERT INTO `ebook` (`ebook_no`, `ebook_isbn`, `category_name`, `ebook_title`, `
 	(435, '122647437-3', '여행', 'Biodex', 'Anastasia', 'Minyx', 891, 10687, 'noimage.png', 'sollicitudin ut suscipit a feugiat et eros vestibulum ac est lacinia nisi', '구편절판', '2021-08-30 00:00:00', '2021-09-23 00:00:00'),
 	(436, '667011259-9', '외국어', 'Holdlamis', 'Issie', 'Dynazzy', 762, 29416, 'noimage.png', 'tempus vel pede morbi porttitor lorem id ligula suspendisse ornare consequat lectus in est risus auctor', '품절', '2020-10-10 00:00:00', '2021-09-23 00:00:00'),
 	(437, '315312548-1', '만화', 'Andalax', 'Wendeline', 'Vinder', 377, 17540, 'noimage.png', 'quam pede lobortis ligula sit amet eleifend pede libero quis orci nullam molestie nibh in lectus pellentesque at nulla suspendisse', '품절', '2021-08-12 00:00:00', '2021-09-23 00:00:00'),
-	(438, '511636985-4', '미술', 'Regrant', 'Carver', 'Eire', 360, 24445, 'cat.jpg', 'proin leo odio porttitor id consequat in consequat ut nulla sed accumsan felis ut at dolor quis', '절판', '2021-09-22 00:00:00', '2021-09-23 00:00:00'),
+	(438, '511636985-4', '미술', 'Regrant', 'Carver', 'Eire', 360, 24445, 'dall.png', 'proin leo odio porttitor id consequat in consequat ut nulla sed accumsan felis ut at dolor quis', '절판', '2021-09-22 00:00:00', '2021-09-23 00:00:00'),
 	(439, '369973049-2', '소설', 'Biodex', 'Wilburt', 'Skaboo', 282, 13803, 'noimage.png', 'vel ipsum praesent blandit lacinia erat vestibulum sed magna at nunc commodo placerat praesent blandit', '절판', '2021-09-08 00:00:00', '2021-09-23 00:00:00'),
 	(440, '348696649-9', '소설', 'It', 'Lennie', 'Twinder', 639, 10569, 'noimage.png', 'aliquam quis turpis eget elit sodales scelerisque mauris sit amet eros suspendisse accumsan tortor quis turpis sed ante vivamus tortor', '품절', '2020-12-25 00:00:00', '2021-09-23 00:00:00'),
 	(441, '840880137-6', '미술', 'Aerified', 'Averil', 'Cogibox', 528, 27392, 'noimage.png', 'integer aliquet massa id lobortis convallis tortor risus dapibus augue vel accumsan tellus nisi eu orci mauris lacinia', '판매중', '2021-05-21 00:00:00', '2021-09-23 00:00:00'),
@@ -587,7 +584,7 @@ INSERT INTO `ebook` (`ebook_no`, `ebook_isbn`, `category_name`, `ebook_title`, `
 	(520, '916158977-2', '외국어', 'Ronstring', 'Martainn', 'Edgeify', 859, 21295, 'noimage.png', 'mauris viverra diam vitae quam suspendisse potenti nullam porttitor lacus at turpis donec posuere metus', '품절', '2021-02-09 00:00:00', '2021-09-23 00:00:00'),
 	(521, '748245123-4', '종교', 'Sonair', 'Tasha', 'Kazio', 771, 19741, 'noimage.png', 'viverra diam vitae quam suspendisse potenti nullam porttitor lacus at turpis donec posuere metus vitae ipsum', '구편절판', '2021-06-30 00:00:00', '2021-09-23 00:00:00'),
 	(522, '098740627-2', '외국어', 'Cardify', 'Merill', 'Leexo', 594, 18324, 'noimage.png', 'imperdiet sapien urna pretium nisl ut volutpat sapien arcu sed augue', '품절', '2021-05-15 00:00:00', '2021-09-23 00:00:00'),
-	(523, '598407069-3', '여행', 'Holdlamis', 'Stanislas', 'Babblestorm', 634, 21261, 'noimage.png', 'semper sapien a libero nam dui proin leo odio porttitor id consequat in consequat ut nulla sed accumsan', '판매중', '2021-09-22 00:00:00', '2021-09-23 00:00:00'),
+	(523, '598407069-3', '여행', 'Holdlamis', 'Stanislas', 'Babblestorm', 634, 21261, 'yan.JPG', 'semper sapien a libero nam dui proin leo odio porttitor id consequat in consequat ut nulla sed accumsan', '판매중', '2021-09-22 00:00:00', '2021-09-23 00:00:00'),
 	(524, '711995427-X', '경제', 'Holdlamis', 'Iorgos', 'Browsezoom', 403, 26364, 'noimage.png', 'cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus etiam vel', '구편절판', '2021-02-20 00:00:00', '2021-09-23 00:00:00'),
 	(525, '329887299-7', '종교', 'Overhold', 'Leda', 'Realcube', 421, 18776, 'noimage.png', 'eu sapien cursus vestibulum proin eu mi nulla ac enim in tempor turpis nec euismod scelerisque', '품절', '2021-02-20 00:00:00', '2021-09-23 00:00:00'),
 	(526, '994367074-6', '경제', 'Opela', 'Warren', 'Twitterwire', 705, 28699, 'noimage.png', 'vitae nisi nam ultrices libero non mattis pulvinar nulla pede ullamcorper augue a', '구편절판', '2020-11-29 00:00:00', '2021-09-23 00:00:00'),
@@ -1066,7 +1063,6 @@ INSERT INTO `ebook` (`ebook_no`, `ebook_isbn`, `category_name`, `ebook_title`, `
 /*!40000 ALTER TABLE `ebook` ENABLE KEYS */;
 
 -- 테이블 shop.member 구조 내보내기
-DROP TABLE IF EXISTS `member`;
 CREATE TABLE IF NOT EXISTS `member` (
   `member_no` int(11) NOT NULL AUTO_INCREMENT,
   `member_id` varchar(50) NOT NULL,
@@ -1192,7 +1188,6 @@ INSERT INTO `member` (`member_no`, `member_id`, `member_pw`, `member_level`, `me
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 
 -- 테이블 shop.notice 구조 내보내기
-DROP TABLE IF EXISTS `notice`;
 CREATE TABLE IF NOT EXISTS `notice` (
   `notice_no` int(11) NOT NULL AUTO_INCREMENT,
   `notice_title` varchar(500) NOT NULL,
@@ -1214,7 +1209,6 @@ INSERT INTO `notice` (`notice_no`, `notice_title`, `notice_content`, `member_no`
 /*!40000 ALTER TABLE `notice` ENABLE KEYS */;
 
 -- 테이블 shop.orders 구조 내보내기
-DROP TABLE IF EXISTS `orders`;
 CREATE TABLE IF NOT EXISTS `orders` (
   `order_no` int(11) NOT NULL AUTO_INCREMENT,
   `ebook_no` int(11) NOT NULL,
@@ -1223,7 +1217,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `create_date` datetime NOT NULL,
   `update_date` datetime NOT NULL,
   PRIMARY KEY (`order_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb3;
 
 -- 테이블 데이터 shop.orders:~55 rows (대략적) 내보내기
 DELETE FROM `orders`;
@@ -1285,11 +1279,13 @@ INSERT INTO `orders` (`order_no`, `ebook_no`, `member_no`, `order_price`, `creat
 	(54, 132, 9, 1000, '2021-09-28 18:12:33', '2021-09-28 18:12:33'),
 	(55, 1, 5, 1000, '2021-09-28 19:01:37', '2021-09-28 19:01:37'),
 	(56, 120, 7, 1000, '2021-09-28 19:28:49', '2021-09-28 19:28:49'),
-	(57, 132, 5, 11585, '2021-09-29 15:45:13', '2021-09-29 15:45:13');
+	(57, 132, 5, 11585, '2021-09-29 15:45:13', '2021-09-29 15:45:13'),
+	(58, 120, 1, 17808, '2022-01-04 17:55:51', '2022-01-04 17:55:51'),
+	(59, 120, 1, 17808, '2022-01-04 17:56:03', '2022-01-04 17:56:03'),
+	(60, 120, 105, 17808, '2022-01-04 17:56:13', '2022-01-04 17:56:13');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 
 -- 테이블 shop.order_comment 구조 내보내기
-DROP TABLE IF EXISTS `order_comment`;
 CREATE TABLE IF NOT EXISTS `order_comment` (
   `order_no` int(11) NOT NULL,
   `ebook_no` int(11) NOT NULL,
@@ -1313,7 +1309,6 @@ INSERT INTO `order_comment` (`order_no`, `ebook_no`, `order_score`, `order_comme
 /*!40000 ALTER TABLE `order_comment` ENABLE KEYS */;
 
 -- 테이블 shop.qna 구조 내보내기
-DROP TABLE IF EXISTS `qna`;
 CREATE TABLE IF NOT EXISTS `qna` (
   `qna_no` int(11) NOT NULL AUTO_INCREMENT,
   `qna_category` enum('전자책관련','개인정보관련','기타') NOT NULL,
@@ -1339,7 +1334,6 @@ INSERT INTO `qna` (`qna_no`, `qna_category`, `qna_title`, `qna_content`, `qna_se
 /*!40000 ALTER TABLE `qna` ENABLE KEYS */;
 
 -- 테이블 shop.qna_comment 구조 내보내기
-DROP TABLE IF EXISTS `qna_comment`;
 CREATE TABLE IF NOT EXISTS `qna_comment` (
   `qna_no` int(11) NOT NULL,
   `qna_comment_content` text NOT NULL,
